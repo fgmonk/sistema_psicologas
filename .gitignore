@@ -1,0 +1,21 @@
+# Entorno virtual
+env/
+
+# Archivos compilados de Python
+__pycache__/
+*.py[cod]
+
+# Base de datos SQLite
+db.sqlite3
+
+# Archivos de log
+*.log
+
+# Archivos estáticos compilados
+staticfiles/
+
+# Configuraciones VS Code
+.vscode/
+
+# MacOS
+.DS_Store
