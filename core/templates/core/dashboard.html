@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menú Principal</title>
+</head>
+<body>
+    <h1>Bienvenido, {{ user.username }}!</h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Inicio</a></li>
+            <li><a href="/pacientes/">Pacientes</a></li>
+            <li><a href="/sesiones/">Sesiones</a></li>
+            <li><a href="/informes/">Informes</a></li>
+            <li><a href="/pagos/">Pagos</a></li>
+            <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+        </ul>
+    </nav>
+</body>
+</html>
