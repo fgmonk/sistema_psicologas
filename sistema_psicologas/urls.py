@@ -6,14 +6,16 @@ from django.contrib.auth.decorators import login_required
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    # Menú principal, protegido por login
     path('', login_required(dashboard), name='home'),
 
-    # Login y logout en /accounts/
+    # Login/logout (dentro de core)
     path('accounts/', include('core.urls')),
 
+    # Solo pacientes habilitado
     path('pacientes/', include('pacientes.urls')),
-    path('sesiones/', include('sesiones.urls')),
-    path('informes/', include('informes.urls')),
-    path('pagos/', include('pagos.urls')),
+
+    # Por ahora comentar o eliminar otras apps
+    # path('sesiones/', include('sesiones.urls')),
+    # path('informes/', include('informes.urls')),
+    # path('pagos/', include('pagos.urls')),
 ]

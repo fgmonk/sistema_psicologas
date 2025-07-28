@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def lista_informes(request):
+    return render(request, 'informes/lista.html')

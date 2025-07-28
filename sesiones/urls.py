@@ -1,5 +1,6 @@
 from django.urls import path
+from . import views
 
 urlpatterns = [
-    # rutas pendientes de definir
+    path('', views.sesiones_list, name='sesiones_list'),
 ]

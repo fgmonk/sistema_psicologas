@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Sistema Psicólogas{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>Sistema Consulta Psicológica</h1>
+        <nav>
+            <a href="/">Inicio</a> |
+            <a href="{% url 'paciente_list' %}">Pacientes</a> |
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+        </nav>
+    </header>
+    <hr />
+    <main>
+        {% block content %}
+        <!-- Contenido específico de cada página -->
+        {% endblock %}
+    </main>
+    <hr />
+    <footer>
+        <p>© 2025 Felipe González</p>
+    </footer>
+</body>
+</html>

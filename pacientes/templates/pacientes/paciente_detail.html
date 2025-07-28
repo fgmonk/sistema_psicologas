@@ -1,0 +1,36 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<h2>Lista de Pacientes</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>RUT</th>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for paciente in pacientes %}
+    <tr>
+      <td>{{ paciente.rut }}</td>
+      <td>
+        <a href="{% url 'paciente_detail' paciente.pk %}">
+          {{ paciente.nombre }}
+        </a>
+      </td>
+      <td>{{ paciente.edad }}</td>
+      <td>
+        <a href="{% url 'paciente_edit' paciente.pk %}">Editar</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="4">No hay pacientes registrados.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

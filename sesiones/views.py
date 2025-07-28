@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def sesiones_list(request):
+    return render(request, 'sesiones/lista.html')

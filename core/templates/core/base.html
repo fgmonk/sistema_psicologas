@@ -3,7 +3,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
-    <title>Menú Principal</title>
+    <title>{% block title %}Menú Principal{% endblock %}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -43,11 +43,7 @@
             <ul>
                 <li><a href="{% url 'home' %}">Inicio</a></li>
                 <li><a href="{% url 'paciente_list' %}">Pacientes</a></li>
-                <!--
-                <li><a href="{% url 'sesiones_list' %}">Sesiones</a></li>
-                <li><a href="{% url 'informes_list' %}">Informes</a></li>
-                <li><a href="{% url 'pagos_list' %}">Pagos</a></li>
-                -->
+                <!-- Puedes agregar más ítems de menú aquí si es necesario -->
                 <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
             </ul>
         </nav>
@@ -55,7 +51,6 @@
 
     <main>
         {% block content %}
-        <p>Selecciona una opción del menú para comenzar.</p>
         {% endblock %}
     </main>
 </body>
