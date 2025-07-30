@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agendar Nueva Sesión</title>
+</head>
+<body>
+    <h1>Agendar Nueva Sesión</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar sesión</button>
+    </form>
+    <a href="{% url 'sesiones_list' %}">Volver a la lista de sesiones</a>
+</body>
+</html>

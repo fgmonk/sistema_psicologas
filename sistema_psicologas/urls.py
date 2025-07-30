@@ -15,7 +15,7 @@ urlpatterns = [
     path('pacientes/', include('pacientes.urls')),
 
     # Por ahora comentar o eliminar otras apps
-    # path('sesiones/', include('sesiones.urls')),
+    path('sesiones/', include('sesiones.urls')),
     # path('informes/', include('informes.urls')),
     # path('pagos/', include('pagos.urls')),
 ]

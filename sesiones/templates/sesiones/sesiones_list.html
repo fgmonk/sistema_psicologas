@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Sesiones</title>
+</head>
+<body>
+    <h1>Sesiones Agendadas</h1>
+
+    <a href="{% url 'crear_sesion' %}">+ Agendar nueva sesión</a>
+
+    {% if sesiones %}
+        <table border="1" cellpadding="5">
+            <thead>
+                <tr>
+                    <th>Paciente</th>
+                    <th>RUT</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Observaciones</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sesion in sesiones %}
+                    <tr>
+                        <td>{{ sesion.paciente.nombre }}</td>
+                        <td>{{ sesion.paciente.rut }}</td>
+                        <td>{{ sesion.fecha }}</td>
+                        <td>{{ sesion.hora }}</td>
+                        <td>{{ sesion.observaciones|default:"-" }}</td>
+                        <td>
+                            <a href="{% url 'editar_observacion' sesion.pk %}">Editar observación</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No hay sesiones agendadas.</p>
+    {% endif %}
+</body>
+</html>
