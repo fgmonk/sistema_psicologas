@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Informes del Paciente</title>
+</head>
+<body>
+    <h1>Lista de Informes</h1>
+
+    <a href="{% url 'crear_informe' %}">Crear nuevo informe</a>
+
+    <ul>
+        {% for informe in informes %}
+            <li>
+                {{ informe.paciente.nombre }} - {{ informe.get_tipo_display }} - {{ informe.fecha_creacion }}
+                <a href="{% url 'editar_informe' informe.id %}">Ver / Editar</a>
+            </li>
+        {% empty %}
+            <li>No hay informes registrados.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

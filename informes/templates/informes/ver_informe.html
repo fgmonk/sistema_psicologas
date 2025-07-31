@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Informe</title>
+</head>
+<body>
+    <h1>Informe del Paciente</h1>
+
+    <p><strong>Paciente:</strong> {{ informe.paciente.nombre }} ({{ informe.paciente.rut }})</p>
+    <p><strong>Tipo de Informe:</strong> {{ informe.get_tipo_display }}</p>
+    <p><strong>Fecha de Creación:</strong> {{ informe.fecha_creacion }}</p>
+
+    <hr>
+
+    <h2>Contenido del Informe</h2>
+    <div>
+        <p>{{ informe.contenido|linebreaks }}</p>
+    </div>
+
+    <hr>
+    <a href="{% url 'listar_informes' %}">← Volver a la lista de informes</a>
+    <a href="{% url 'editar_informe' informe.id %}">✏️ Editar informe</a>
+</body>
+</html>

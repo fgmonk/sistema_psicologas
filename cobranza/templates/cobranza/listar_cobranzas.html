@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Cobranzas</title>
+</head>
+<body>
+    <h1>Cobranzas Registradas</h1>
+
+    <table border="1">
+        <tr>
+            <th>Paciente</th>
+            <th>RUT</th>
+            <th>Fecha sesión</th>
+            <th>Monto</th>
+            <th>Estado</th>
+            <th>Fecha de pago</th>
+        </tr>
+        {% for cobranza in cobranzas %}
+        <tr>
+            <td>{{ cobranza.sesion.paciente.nombre }}</td>
+            <td>{{ cobranza.sesion.paciente.rut }}</td>
+            <td>{{ cobranza.sesion.fecha }}</td>
+            <td>${{ cobranza.monto }}</td>
+            <td>{{ cobranza.estado }}</td>
+            <td>{{ cobranza.fecha_pago|default:"-" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No hay cobranzas registradas.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

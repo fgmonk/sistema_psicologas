@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Sesion
-from .forms import SesionForm, ObservacionForm  # Asegúrate de tener ambos formularios creados
+from .forms import SesionForm, ObservacionForm  
 
 def sesiones_list(request):
     sesiones = Sesion.objects.all().order_by('fecha', 'hora')

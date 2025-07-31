@@ -40,7 +40,7 @@ INSTALLED_APPS = [
         'pacientes',
     'sesiones',
     'informes',
-    'pagos',
+    'cobranza',
     'core',
 ]
 
