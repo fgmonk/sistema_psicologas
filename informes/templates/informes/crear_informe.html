@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Crear Informe</title>
-</head>
-<body>
+{% extends "core/base.html" %}
+
+{% block title %}Crear Informe{% endblock %}
+
+{% block content %}
     <h1>Crear Informe</h1>
 
     <form method="post">
@@ -14,5 +12,4 @@
         <button type="submit">Guardar</button>
         <a href="{% url 'listar_informes' %}">Cancelar</a>
     </form>
-</body>
-</html>
+{% endblock %}

@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Informe</title>
-</head>
-<body>
+{% extends "core/base.html" %}
+
+{% block title %}Informe del Paciente{% endblock %}
+
+{% block content %}
     <h1>Informe del Paciente</h1>
 
     <p><strong>Paciente:</strong> {{ informe.paciente.nombre }} ({{ informe.paciente.rut }})</p>
@@ -21,5 +19,4 @@
     <hr>
     <a href="{% url 'listar_informes' %}">← Volver a la lista de informes</a>
     <a href="{% url 'editar_informe' informe.id %}">✏️ Editar informe</a>
-</body>
-</html>
+{% endblock %}

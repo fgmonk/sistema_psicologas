@@ -1,3 +1,8 @@
+{% extends "core/base.html" %}
+
+{% block title %}Editar Observaciones de Sesión{% endblock %}
+
+{% block content %}
 <h1>Editar Observaciones de Sesión</h1>
 
 <form method="post">
@@ -7,3 +12,4 @@
 </form>
 
 <a href="{% url 'listar_sesiones' %}">Volver a lista de sesiones</a>
+{% endblock %}

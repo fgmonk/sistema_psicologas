@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Lista de Sesiones</title>
-</head>
-<body>
+{% extends "core/base.html" %}
+
+{% block title %}Sesiones Agendadas{% endblock %}
+
+{% block content %}
     <h1>Sesiones Agendadas</h1>
 
     <a href="{% url 'crear_sesion' %}">+ Agendar nueva sesión</a>
@@ -39,5 +37,4 @@
     {% else %}
         <p>No hay sesiones agendadas.</p>
     {% endif %}
-</body>
-</html>
+{% endblock %}

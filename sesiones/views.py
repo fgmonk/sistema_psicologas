@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Sesion
 from .forms import SesionForm, ObservacionForm  
+from django.core.mail import send_mail
+from django.conf import settings
 
 def sesiones_list(request):
     sesiones = Sesion.objects.all().order_by('fecha', 'hora')
@@ -10,7 +12,23 @@ def crear_sesion(request):
     if request.method == 'POST':
         form = SesionForm(request.POST)
         if form.is_valid():
-            form.save()
+            sesion = form.save()
+
+            # Preparar datos para el correo
+            paciente_email = sesion.paciente.correo_contacto
+            fecha = sesion.fecha.strftime('%d-%m-%Y')
+            hora = sesion.hora.strftime('%H:%M')
+            subject = 'Confirmación de sesión agendada'
+            message = f'Estimado/a,\n\nSe ha agendado una sesión para el día {fecha} a las {hora}.\n\nSaludos,\nEquipo de psicología.'
+
+            send_mail(
+                subject,
+                message,
+                settings.EMAIL_HOST_USER,  # correo configurado en settings.py
+                [paciente_email],
+                fail_silently=False,
+            )
+
             return redirect('sesiones_list')
     else:
         form = SesionForm()

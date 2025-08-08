@@ -1,36 +1,50 @@
 {% extends "core/base.html" %}
 
 {% block content %}
-<h2>Lista de Pacientes</h2>
+<h2>Ficha del Paciente</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>RUT</th>
-      <th>Nombre</th>
-      <th>Edad</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for paciente in pacientes %}
-    <tr>
-      <td>{{ paciente.rut }}</td>
-      <td>
-        <a href="{% url 'paciente_detail' paciente.pk %}">
-          {{ paciente.nombre }}
-        </a>
-      </td>
-      <td>{{ paciente.edad }}</td>
-      <td>
-        <a href="{% url 'paciente_edit' paciente.pk %}">Editar</a>
-      </td>
-    </tr>
-    {% empty %}
-    <tr>
-      <td colspan="4">No hay pacientes registrados.</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<h3>Información General</h3>
+<ul>
+  <li><strong>Nombre:</strong> {{ paciente.nombre }}</li>
+  <li><strong>RUT:</strong> {{ paciente.rut }}</li>
+  <li><strong>Edad:</strong> {{ paciente.edad }}</li>
+  <li><strong>Dirección:</strong> {{ paciente.direccion }}</li>
+  <li><strong>Centro Educacional:</strong> {{ paciente.centro_educacional }}</li>
+</ul>
+
+<h3>Datos del Apoderado</h3>
+<ul>
+  <li><strong>Nombre Apoderado:</strong> {{ paciente.nombre_apoderado }}</li>
+  <li><strong>Teléfono de Contacto:</strong> {{ paciente.telefono_contacto }}</li>
+  <li><strong>Correo de Contacto:</strong> {{ paciente.correo_contacto }}</li>
+</ul>
+
+<h3>Sesiones Programadas</h3>
+<ul>
+  {% for sesion in sesiones_programadas %}
+    <li>{{ sesion.fecha }} - {{ sesion.estado }}</li>
+  {% empty %}
+    <li>No hay sesiones programadas.</li>
+  {% endfor %}
+</ul>
+
+<h3>Sesiones Realizadas</h3>
+<ul>
+  {% for sesion in sesiones_realizadas %}
+    <li>{{ sesion.fecha }} - {{ sesion.estado }}</li>
+  {% empty %}
+    <li>No hay sesiones realizadas.</li>
+  {% endfor %}
+</ul>
+
+<h3>Informes Generados</h3>
+<ul>
+  {% for informe in informes %}
+    <li>{{ informe.get_tipo_display }} - {{ informe.fecha_creacion }}</li>
+  {% empty %}
+    <li>No hay informes generados.</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'paciente_edit' paciente.pk %}">Editar Paciente</a>
 {% endblock %}

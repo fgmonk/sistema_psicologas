@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Informes del Paciente</title>
-</head>
-<body>
+{% extends "core/base.html" %}
+
+{% block title %}Informes del Paciente{% endblock %}
+
+{% block content %}
     <h1>Lista de Informes</h1>
 
     <a href="{% url 'crear_informe' %}">Crear nuevo informe</a>
@@ -19,5 +17,4 @@
             <li>No hay informes registrados.</li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}
