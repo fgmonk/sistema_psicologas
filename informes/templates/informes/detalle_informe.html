@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+
+{% block title %}Detalle de Informe{% endblock %}
+
+{% block content %}
+<h2>Informe: {{ informe.tipo }}</h2>
+<p>Paciente: {{ informe.paciente }}</p>
+<p>Fecha: {{ informe.fecha }}</p>
+<p>Contenido:</p>
+<pre>{{ informe.contenido }}</pre>
+<a href="{% url 'listar_informes' %}">Volver a lista de informes</a>
+{% endblock %}
