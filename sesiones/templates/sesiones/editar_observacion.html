@@ -1,9 +1,9 @@
 {% extends "core/base.html" %}
 
-{% block title %}Editar Observaciones de Sesión{% endblock %}
+{% block title %}Editar Comentario de Sesión{% endblock %}
 
 {% block content %}
-<h1>Editar Observaciones de Sesión</h1>
+<h1>Editar Comentario de Sesión</h1>
 
 <form method="post">
     {% csrf_token %}
@@ -11,5 +11,5 @@
     <button type="submit">Guardar</button>
 </form>
 
-<a href="{% url 'listar_sesiones' %}">Volver a lista de sesiones</a>
+<a href="{% url 'sesiones_list' %}">Volver a lista de sesiones</a>
 {% endblock %}

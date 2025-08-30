@@ -3,38 +3,49 @@
 {% block title %}Sesiones Agendadas{% endblock %}
 
 {% block content %}
-    <h1>Sesiones Agendadas</h1>
+<h1>Sesiones Agendadas</h1>
 
-    <a href="{% url 'crear_sesion' %}">+ Agendar nueva sesión</a>
+<a href="{% url 'crear_sesion' %}" class="btn btn-primary">+ Agendar nueva sesión</a>
 
-    {% if sesiones %}
-        <table border="1" cellpadding="5">
-            <thead>
-                <tr>
-                    <th>Paciente</th>
-                    <th>RUT</th>
-                    <th>Fecha</th>
-                    <th>Hora</th>
-                    <th>Observaciones</th>
-                    <th>Acción</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for sesion in sesiones %}
-                    <tr>
-                        <td>{{ sesion.paciente.nombre }}</td>
-                        <td>{{ sesion.paciente.rut }}</td>
-                        <td>{{ sesion.fecha }}</td>
-                        <td>{{ sesion.hora }}</td>
-                        <td>{{ sesion.observaciones|default:"-" }}</td>
-                        <td>
-                            <a href="{% url 'editar_observacion' sesion.pk %}">Editar observación</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>No hay sesiones agendadas.</p>
-    {% endif %}
+{% if sesiones %}
+<table border="1" cellpadding="5">
+    <thead>
+        <tr>
+            <th>Paciente</th>
+            <th>RUT</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Motivo</th>
+            <th>Comentario</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for sesion in sesiones %}
+        <tr>
+            <td>{{ sesion.paciente.nombre }}</td>
+            <td>{{ sesion.paciente.rut }}</td>
+            <td>{{ sesion.fecha }}</td>
+            <td>{{ sesion.hora }}</td>
+            <td>{{ sesion.motivo|default:"-" }}</td>
+            <td>{{ sesion.comentario|default:"-" }}</td>
+            <td>{{ sesion.get_estado_display }}</td>
+            <td>
+                <a href="{% url 'editar_observacion' sesion.pk %}">Editar comentario</a>
+                
+                {% if sesion.estado == 'programada' %}
+                    | <a href="{% url 'marcar_realizada' sesion.pk %}">Marcar como realizada</a>
+                {% else %}
+                    | Realizada
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No hay sesiones agendadas.</p>
+{% endif %}
+
 {% endblock %}

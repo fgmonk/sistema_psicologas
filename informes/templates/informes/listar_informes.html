@@ -3,18 +3,37 @@
 {% block title %}Informes del Paciente{% endblock %}
 
 {% block content %}
-    <h1>Lista de Informes</h1>
+<h1>Lista de Informes</h1>
 
-    <a href="{% url 'crear_informe' %}">Crear nuevo informe</a>
+<a href="{% url 'crear_informe' %}">Crear nuevo informe</a>
 
-    <ul>
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Paciente</th>
+            <th>Tipo de Informe</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
         {% for informe in informes %}
-            <li>
-                {{ informe.paciente.nombre }} - {{ informe.get_tipo_display }} - {{ informe.fecha_creacion }}
-                <a href="{% url 'editar_informe' informe.id %}">Ver / Editar</a>
-            </li>
+        <tr>
+            <td>{{ informe.paciente.nombre }}</td>
+            <td>{{ informe.get_tipo_display }}</td>
+            <td>{{ informe.fecha }}</td>
+            <td>
+                <a href="{% url 'detalle_informe' informe.id %}">Ver</a> |
+                <a href="{% url 'editar_informe' informe.id %}">Editar</a> |
+                <a href="{% url 'exportar_pdf' informe.id %}">PDF</a> |
+                <a href="{% url 'exportar_word' informe.id %}">Word</a>
+            </td>
+        </tr>
         {% empty %}
-            <li>No hay informes registrados.</li>
+        <tr>
+            <td colspan="4">No hay informes registrados.</td>
+        </tr>
         {% endfor %}
-    </ul>
+    </tbody>
+</table>
 {% endblock %}

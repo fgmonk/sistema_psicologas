@@ -9,7 +9,7 @@ class Cobranza(models.Model):
         choices=[('pendiente', 'Pendiente'), ('pagado', 'Pagado')],
         default='pendiente'
     )
-    monto = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    monto = models.DecimalField(max_digits=10, decimal_places=2, default=40000)
     fecha_pago = models.DateField(blank=True, null=True)
     observaciones = models.TextField(blank=True, null=True)
 

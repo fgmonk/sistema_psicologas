@@ -3,13 +3,78 @@
 {% block title %}Crear Informe{% endblock %}
 
 {% block content %}
-    <h1>Crear Informe</h1>
+<h1>Crear Informe</h1>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
+<form method="post">
+    {% csrf_token %}
 
-        <button type="submit">Guardar</button>
-        <a href="{% url 'listar_informes' %}">Cancelar</a>
-    </form>
+    <label for="id_paciente">Paciente:</label>
+    {{ form.paciente }}
+
+    <label for="id_tipo">Tipo de Informe:</label>
+    {{ form.tipo }}
+
+    <h3>II. Motivo de Consulta</h3>
+    <textarea id="motivo" name="motivo" rows="5" placeholder="Escriba el motivo de consulta..."></textarea>
+
+    <h3>III. Antecedentes Relevantes</h3>
+    <textarea id="antecedentes" name="antecedentes" rows="5" placeholder="Complete los antecedentes..."></textarea>
+
+    <h3>IV. Sesiones e Instrumentos Aplicados</h3>
+    <textarea id="sesiones" name="sesiones" rows="5" placeholder="Liste sesiones e instrumentos aplicados..."></textarea>
+
+    <h3>V. Resultados y Sugerencias</h3>
+    <textarea id="resultados" name="resultados" rows="5" placeholder="Describa resultados y sugerencias..."></textarea>
+
+    <button type="submit">Guardar</button>
+    <a href="{% url 'listar_informes' %}">Cancelar</a>
+</form>
+
+<style>
+    form {
+        max-width: 950px;
+    }
+    textarea {
+        width: 100%;
+        max-width: 900px;
+        box-sizing: border-box;
+        white-space: pre-wrap;
+        margin-bottom: 20px;
+    }
+</style>
+
+<script>
+const tipoSelect = document.getElementById('id_tipo');
+
+// Plantillas separadas por secciones
+const PLANTILLA_TIPO_1 = {
+    motivo: "xxxx asiste a la consulta por iniciativa del equipo de ASM y sus padres...",
+    antecedentes: "Como antecedente significativo, la madre de xxxxx...",
+    sesiones: "- Sesión de motivo de consulta y anamnesis\n- Sesión de observación...",
+    resultados: "xxxxxxx se presenta de manera cooperativa durante la sesión..."
+};
+
+const PLANTILLA_TIPO_2 = {
+    motivo: "[Describa el motivo de consulta]",
+    antecedentes: "[Complete los antecedentes familiares y personales]",
+    sesiones: "[Liste sesiones e instrumentos aplicados]",
+    resultados: "[Describa resultados y sugerencias]"
+};
+
+function actualizarCampos() {
+    let plantilla = {};
+    if (tipoSelect.value === '1') plantilla = PLANTILLA_TIPO_1;
+    else if (tipoSelect.value === '2') plantilla = PLANTILLA_TIPO_2;
+    else plantilla = {motivo:'', antecedentes:'', sesiones:'', resultados:''};
+
+    document.getElementById('motivo').value = plantilla.motivo;
+    document.getElementById('antecedentes').value = plantilla.antecedentes;
+    document.getElementById('sesiones').value = plantilla.sesiones;
+    document.getElementById('resultados').value = plantilla.resultados;
+}
+
+tipoSelect.addEventListener('change', actualizarCampos);
+document.addEventListener('DOMContentLoaded', actualizarCampos);
+</script>
+
 {% endblock %}

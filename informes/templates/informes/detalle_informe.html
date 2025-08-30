@@ -3,10 +3,17 @@
 {% block title %}Detalle de Informe{% endblock %}
 
 {% block content %}
-<h2>Informe: {{ informe.tipo }}</h2>
-<p>Paciente: {{ informe.paciente }}</p>
-<p>Fecha: {{ informe.fecha }}</p>
-<p>Contenido:</p>
+<h2>Informe: {{ informe.get_tipo_display }}</h2>
+<p><strong>Paciente:</strong> {{ informe.paciente.nombre }}</p>
+<p><strong>Fecha:</strong> {{ informe.fecha }}</p>
+
+<hr>
+<h3>Contenido</h3>
 <pre>{{ informe.contenido }}</pre>
-<a href="{% url 'listar_informes' %}">Volver a lista de informes</a>
+
+<hr>
+<a href="{% url 'editar_informe' informe.id %}">Editar</a> |
+<a href="{% url 'exportar_pdf' informe.id %}">Exportar PDF</a> |
+<a href="{% url 'exportar_word' informe.id %}">Exportar Word</a> |
+<a href="{% url 'listar_informes' %}">Volver a lista</a>
 {% endblock %}

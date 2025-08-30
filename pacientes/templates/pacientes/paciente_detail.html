@@ -1,50 +1,69 @@
 {% extends "core/base.html" %}
 
+{% block title %}Ficha del Paciente{% endblock %}
+
 {% block content %}
 <h2>Ficha del Paciente</h2>
 
 <h3>Información General</h3>
 <ul>
-  <li><strong>Nombre:</strong> {{ paciente.nombre }}</li>
-  <li><strong>RUT:</strong> {{ paciente.rut }}</li>
-  <li><strong>Edad:</strong> {{ paciente.edad }}</li>
-  <li><strong>Dirección:</strong> {{ paciente.direccion }}</li>
-  <li><strong>Centro Educacional:</strong> {{ paciente.centro_educacional }}</li>
-</ul>
+ <li>Nombre: {{ paciente.nombre }}</li>
+    <li>RUT: {{ paciente.rut }}</li>
+    <li>Edad: {{ paciente.edad }}</li>
+    <li>Dirección: {{ paciente.calle }} {{ paciente.numero }}, {{ paciente.comuna }}, {{ paciente.ciudad }}</li>
+    <li>Centro Educacional: {{ paciente.get_centro_educacional_display }}</li>
 
 <h3>Datos del Apoderado</h3>
 <ul>
-  <li><strong>Nombre Apoderado:</strong> {{ paciente.nombre_apoderado }}</li>
-  <li><strong>Teléfono de Contacto:</strong> {{ paciente.telefono_contacto }}</li>
-  <li><strong>Correo de Contacto:</strong> {{ paciente.correo_contacto }}</li>
+    <li>Nombre Apoderado: {{ paciente.nombre_apoderado }}</li>
+    <li>Teléfono de Contacto: {{ paciente.telefono_contacto }}</li>
+    <li>Correo de Contacto: {{ paciente.correo_contacto }}</li>
 </ul>
 
 <h3>Sesiones Programadas</h3>
-<ul>
-  {% for sesion in sesiones_programadas %}
-    <li>{{ sesion.fecha }} - {{ sesion.estado }}</li>
-  {% empty %}
-    <li>No hay sesiones programadas.</li>
-  {% endfor %}
-</ul>
+{% if sesiones_programadas %}
+    <ul>
+    {% for sesion in sesiones_programadas %}
+        <li>
+            <a href="{% url 'editar_observacion' sesion.pk %}">
+                {{ sesion.fecha|date:"d M, Y" }} - {{ sesion.estado }}
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay sesiones programadas.</p>
+{% endif %}
 
 <h3>Sesiones Realizadas</h3>
-<ul>
-  {% for sesion in sesiones_realizadas %}
-    <li>{{ sesion.fecha }} - {{ sesion.estado }}</li>
-  {% empty %}
-    <li>No hay sesiones realizadas.</li>
-  {% endfor %}
-</ul>
+{% if sesiones_realizadas %}
+    <ul>
+    {% for sesion in sesiones_realizadas %}
+        <li>
+            <a href="{% url 'editar_observacion' sesion.pk %}">
+                {{ sesion.fecha|date:"d M, Y" }} - {{ sesion.estado }}
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay sesiones realizadas.</p>
+{% endif %}
 
 <h3>Informes Generados</h3>
-<ul>
-  {% for informe in informes %}
-    <li>{{ informe.get_tipo_display }} - {{ informe.fecha_creacion }}</li>
-  {% empty %}
-    <li>No hay informes generados.</li>
-  {% endfor %}
-</ul>
+{% if informes %}
+    <ul>
+    {% for informe in informes %}
+        <li>
+            <a href="{% url 'detalle_informe' informe.pk %}">
+                {{ informe.tipo }} - {{ informe.colegio }}
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay informes generados.</p>
+{% endif %}
 
-<a href="{% url 'paciente_edit' paciente.pk %}">Editar Paciente</a>
+<a href="{% url 'paciente_list' %}">Volver a la lista de pacientes</a>
 {% endblock %}
